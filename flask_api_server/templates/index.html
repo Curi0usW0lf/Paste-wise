@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+
+<head>
+    <title>{{ t }}</title>
+    <!-- href="/static/assets/style.css"-->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+    <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='assets/style.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='assets/emoji.css')}}">
+    <script src="{{ url_for('static',filename='assets/twemoji.min.js')}}"></script>
+    <script src="{{ url_for('static',filename='assets/emoji.js')}}"></script> -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <style>
+        .padding2 {
+            padding: 2rem;
+        }
+        h2 {
+            color: #fff;
+            font-weight: 600;
+        }
+        a, a:hover, a:link, a:visited, a:active {
+            text-decoration: none;
+        }
+        ul {            
+            text-decoration: none;
+            list-style-type: none;     
+            color: #fff;
+            font-weight: 500;
+            font-size: 1.5rem;       
+        }
+        .rightCol {
+            float: right;
+        }
+        .leftCol {
+            float: left;
+        }
+        li {
+            font-size: 2rem;
+            line-height: 2;
+        }
+        .small {
+            font-size: 1.75rem;
+            line-height: 2;
+            font-weight: 500;
+        }
+        li :last-child {
+            margin-bottom: 3rem;
+        }
+        table {
+            font-size: 16px;
+        }
+        button {
+            border-radius: 50;
+        }
+    </style>
+</head>
+
+<body class="container-fluid">
+    <nav class="navbar navbar-default navbar-inverse">
+        <div class="container-fluid padding2">
+            <div class="navbar-header">
+                <a href="#"><h2>{{ h }}</h2></a>
+            </div>  
+            <a href="#"><img src="static/images/clipboard.png" style="float: right" width="8%" height="8%" /></a>
+        </div>
+    </nav>
+    <hr>
+    {% if mode == "get" %}
+    {% if logs[0] %}
+    <table class="table table-stripped table-hover table-responsive">
+        <thead>
+            <tr>
+                <th>Clipboard Content</th>
+                <th>Date</th>
+                <th>Creator</th>
+                <th>Remove</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- <tr id="row">
+                    <th class="desc">Clipboard Content</th>
+                    <th class="date">Date</th>
+                    <th class="pr">Creator</th>
+                    <th class="func1">Remove</th>                    
+                </tr> -->
+            {% for log in logs %}
+            <tr>
+                <!-- <td><a href="./done?_id={{ log['_id'] }}"><input type="image" src="static/images/{{log['done']}}.png"
+                                alt="Submit ME"></a></td> -->
+                <td class="col-lg-5">{{ log["clipboardContent"] }}</td>
+                <td>{{ log["created"].strftime("%B %d, %Y %I:%M %p") }}</td>
+                <td>{{ log["creator"] }}</td>
+                <td><a href="./remove?_id={{ log['_id'] }}"><button type="button" class="btn btn-danger"><strong>Delete</strong></button></a></td>                
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+    {% else %}
+    <h3>No content found</h3>
+    {% endif %}
+    {% elif mode == "delete" %}
+    <h3>Deleted</h3>
+    {% endif %}
+    <hr />
+    </table>
+    <div class="footer navbar-fixed-bottom navbar-inverse">
+        <ul class="padding2 rightCol">
+            <li>Paste-Wise</li>
+            <li class="small">Apache License 2.0</li>
+            <li class="small">Source code on <a href="https://github.com/gdcrocx/CiscoDevNetHackathonToronto">GitHub</a></li>
+            <li><img src="static/images/Octocat.png" width="15%" height="15%"/></li>            
+        </ul>
+        <ul class="padding2 leftCol">
+            <li>Anushka</li>
+            <li>Yagnesh</li>
+            <li>Faruque</li>
+            <li>George</li>    
+        </ul>
+    </div>
+    <script>
+
+    </script>
+</body>
+
+</html>

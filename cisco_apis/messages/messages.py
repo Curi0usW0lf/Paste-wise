@@ -1,4 +1,6 @@
 import requests
+import json
+
 
 class messages:
 
@@ -10,17 +12,34 @@ class messages:
 
         self.defaultHeaders = {}
         self.defaultHeaders.update({'Content-Type': 'application/json'})
-        self.defaultHeaders.update({'Authorization': 'Bearer {}'.format(self.teamsApiBearerToken)})
+        self.defaultHeaders.update(
+            {'Authorization': 'Bearer {}'.format(self.teamsApiBearerToken)})
 
     def getHttpRequest(self, teamsApiEndpoint, roomId):
 
         # , auth=(self.apiUsername, self.apiPasskey)
-        print("\n\tGet API URL - " + self.teamsApiUrl + self.teamsApiEndpoints[teamsApiEndpoint])
+        print("\n\tGet Messages API URL - " + self.teamsApiUrl +
+              self.teamsApiEndpoints[teamsApiEndpoint])
 
         httpUrl = self.teamsApiUrl + self.teamsApiEndpoints[teamsApiEndpoint]
 
-        r = requests.get(httpUrl, headers=self.defaultHeaders)
+        payload = {
+            "roomId": roomId,
+            "max": 5
+        }
+        
+        # , auth=(self.apiUsername, self.apiPasskey)
+        r = requests.get(httpUrl, params=payload, headers=self.defaultHeaders)
 
-        print("\n\tGet API Status Code - " + str(r.status_code))
+        # print(r.request.url)
+        # print(r.request.headers)
+        # print(r.request.body)
 
-        print("\n\tGet API Response - " + str(r.text))    
+        print("\n\tGet Messages API Status Code - " + str(r.status_code))
+
+        # print("\n\tGet Messages API Response - " + str(r.text))
+
+        if str(r.status_code) == 200:
+            return {}
+
+        return r.json()

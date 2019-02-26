@@ -46,4 +46,6 @@ class mongodbApi:
 
         # print(updateId.modified_count)
 
-        print("\n" + str(dbCollection.find_one(insertId.inserted_id)))
+        # print("\n" + str(dbCollection.find_one(insertId.inserted_id)))
+
+        return dbCollection.find_one(insertId.inserted_id)

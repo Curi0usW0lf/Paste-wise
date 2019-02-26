@@ -32,15 +32,15 @@ class httpParser:
 
         print("\n\tGet API Response - " + str(r.text))
 
-    def postHttpRequest(self, teamsApiEndpoint):
+    def postHttpRequest(self, teamsApiEndpoint, roomId, text):
 
         print("\n\tAPI URL - " + self.teamsApiUrl + self.teamsApiEndpoints[teamsApiEndpoint])
 
         httpUrl = self.teamsApiUrl + self.teamsApiEndpoints[teamsApiEndpoint]
 
         payload = {
-            "roomId": "Y2lzY29zcGFyazovL3VzL1JPT00vNjdlNWEwMzAtMzkzNi0xMWU5LWI3MGItMDdkODM3MzQzNTc0",
-            "text": "."
+            "roomId": roomId,
+            "text": text
         }
         # "toPersonId": "",
         #     "toPersonEmail": "",
@@ -50,9 +50,9 @@ class httpParser:
         # , auth=(self.apiUsername, self.apiPasskey)
         r = requests.post(httpUrl, data=json.dumps(payload), headers=self.defaultHeaders)
 
-        print(r.request.url)
-        print(r.request.headers)
-        print(r.request.body)
+        # print(r.request.url)
+        # print(r.request.headers)
+        # print(r.request.body)
 
         print("\n\tAPI Status Code - " + str(r.status_code))
 
