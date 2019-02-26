@@ -2,31 +2,29 @@ import urllib.parse
 import requests
 import json
 
-
 class httpParser:
 
     # def __init__(self):
 
-    #     self.apiUrl = "https://api.ciscospark.com"
-    #     self.apiBearerToken = "NTM4MDhhMDEtYzU2Ni00NGQ0LTkyODQtNmExMTc4ZTVmZThjNGY2OTQ4ODEtYzg2_PF84_consumer"
+    #     self.teamsApiUrl = "https://api.ciscospark.com"
+    #     self.teamsApiBearerToken = "NTM4MDhhMDEtYzU2Ni00NGQ0LTkyODQtNmExMTc4ZTVmZThjNGY2OTQ4ODEtYzg2_PF84_consumer"
 
-    def __init__(self, apiConfigDict, endpointDict):
+    def __init__(self, teamsApiConfigDict, teamsApiEndpointsDict):
 
-        self.apiUrl = apiConfigDict["apiUrl"]
-        self.apiBearerToken = apiConfigDict["apiBearerToken"]
-        self.apiEndpoints = endpointDict
+        self.teamsApiUrl = teamsApiConfigDict["teamsApiUrl"]
+        self.teamsApiBearerToken = teamsApiConfigDict["teamsApiBearerToken"]
+        self.teamsApiEndpoints = teamsApiEndpointsDict
 
         self.defaultHeaders = {}
         self.defaultHeaders.update({'Content-Type': 'application/json'})
-        self.defaultHeaders.update(
-            {'Authorization': 'Bearer {}'.format(self.apiBearerToken)})
+        self.defaultHeaders.update({'Authorization': 'Bearer {}'.format(self.teamsApiBearerToken)})
 
-    def getHttpRequest(self):
+    def getHttpRequest(self, teamsApiEndpoint):
 
         # , auth=(self.apiUsername, self.apiPasskey)
-        print("\n\tGet API URL - " + self.apiUrl + self.apiEndpoints["rooms"])
+        print("\n\tGet API URL - " + self.teamsApiUrl + self.teamsApiEndpoints[teamsApiEndpoint])
 
-        httpUrl = self.apiUrl + self.apiEndpoints["rooms"]
+        httpUrl = self.teamsApiUrl + self.teamsApiEndpoints[teamsApiEndpoint]
 
         r = requests.get(httpUrl, headers=self.defaultHeaders)
 
@@ -34,11 +32,11 @@ class httpParser:
 
         print("\n\tGet API Response - " + str(r.text))
 
-    def postHttpRequest(self):
+    def postHttpRequest(self, teamsApiEndpoint):
 
-        print("\n\tAPI URL - " + self.apiUrl + self.apiEndpoints["messages"])
+        print("\n\tAPI URL - " + self.teamsApiUrl + self.teamsApiEndpoints[teamsApiEndpoint])
 
-        httpUrl = self.apiUrl + self.apiEndpoints["messages"]
+        httpUrl = self.teamsApiUrl + self.teamsApiEndpoints[teamsApiEndpoint]
 
         payload = {
             "roomId": "Y2lzY29zcGFyazovL3VzL1JPT00vNjdlNWEwMzAtMzkzNi0xMWU5LWI3MGItMDdkODM3MzQzNTc0",
@@ -62,26 +60,26 @@ class httpParser:
 
     def putHttpRequest(self):
 
-        print("\n\tAPI URL - " + self.apiUrl)
+        print("\n\tAPI URL - " + self.teamsApiUrl)
 
         payload = {'some': 'data'}
         headers = {'content-type': 'application/json'}
 
         # , auth=(self.apiUsername, self.apiPasskey)
-        r = requests.post(self.apiUrl, data=json.dumps(
+        r = requests.post(self.teamsApiUrl, data=json.dumps(
             payload), headers=headers)
 
         print("\n\tAPI Status Code - " + str(r.status_code))
 
     def deleteHttpRequest(self):
 
-        print("\n\tAPI URL - " + self.apiUrl)
+        print("\n\tAPI URL - " + self.teamsApiUrl)
 
         payload = {'some': 'data'}
         headers = {'content-type': 'application/json'}
 
         # , auth=(self.apiUsername, self.apiPasskey)
-        r = requests.post(self.apiUrl, data=json.dumps(
+        r = requests.post(self.teamsApiUrl, data=json.dumps(
             payload), headers=headers)
 
         print("\n\tAPI Status Code - " + str(r.status_code))

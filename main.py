@@ -5,6 +5,7 @@ import json
 # Import Classes
 from jsonParser.jsonParser import jsonParser
 from httpParser.httpParser import httpParser
+from mongodbApi.mongodbApi import mongodbApi
 
 # Read Config file, if exists
 configDict = {}
@@ -15,12 +16,13 @@ if configFile.is_file():
     configDict = json.loads(f.read())
     f.close()
 
-# Class Initializaion
+# Class Initialization
 jsonParser = jsonParser()
 if configDict:
-    httpParser = httpParser(configDict["apiConfig"], configDict["apiEndpoints"])
+    httpParser = httpParser(configDict["teamsApiConfig"], configDict["teamsApiEndpoints"])
 else:
     httpParser = httpParser()
+mongodbApi = mongodbApi()
 
 # Code Execution Starts
 f = open("sample.json", "r+")
@@ -29,8 +31,11 @@ f.close()
 
 jsonParser.parseJson(rawData)
 
-# httpParser.getHttpRequest()
-httpParser.postHttpRequest()
+# httpParser.getHttpRequest("messages")
+httpParser.postHttpRequest("messages")
+
+# mongodbApi.findAll(configDict["dbConfig"])
+# mongodbApi.insertLog(configDict["dbConfig"], configDict["apiConfig"], "Test Message 2", "Get Username Info from WebEx Teams")
 
 # Code Execution Stops here
 print("\n")

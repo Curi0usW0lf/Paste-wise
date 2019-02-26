@@ -1,0 +1,36 @@
+{
+    "teamsApiConfig": {
+        "teamsApiUrl": "https://api.ciscospark.com",
+        "teamsApiBearerToken": "<Your-API-Key-goes-here"        
+    },
+    "teamsApiEndpoints": {
+        "messages": "/v1/messages",
+        "rooms": "/v1/rooms",
+        "events": "/v1/events",
+        "licenses": "/v1/licenses",
+        "memberships": "/v1/memberships",
+        "organizations": "/v1/organizations",
+        "people": "/v1/people",
+        "resourceGroupMembership": "/v1/resourceGroup/memberships",
+        "resourcegroup": "/v1/resourceGroups",
+        "roles": "/v1/roles",
+        "teamMemberships": "/v1/team/memberships",
+        "teams": "/v1/teams",
+        "webhooks": "/v1/webhooks"
+    },
+    "stickySpaces": [
+        "Y2lzY29zcGFyazovL3VzL1JPT00vNjdlNWEwMzAtMzkzNi0xMWU5LWI3MGItMDdkODM3MzQzNTc0"
+    ],
+    "dbConfig": {
+        "protocol": "mongodb",
+        "server": "localhost",
+        "port": 27017,
+        "database": "webex_teams",
+        "collection": "paste_log"
+    },
+    "apiConfig": {
+        "protocol": "http",
+        "server": "localhost",
+        "port": 3010
+    }
+}
